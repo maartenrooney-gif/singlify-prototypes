@@ -18,7 +18,7 @@ const size = (l: Lane) => `height:${CARD_H[l]}em;`;
           const from = flow.stages[b.from].colStart;
           const last = flow.stages[b.to];
           const w = (last.colStart + last.span - from) * COL_W;
-          return <div class="lg-band" style={`width:${w}em`}>{b.label}</div>;
+          return <div class="lg-band" style={`width:${w}em`}><span>{b.label}</span></div>;
         })}
       </div>
     )}

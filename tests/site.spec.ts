@@ -54,9 +54,9 @@ test('size toggle', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/');
   const frame = page.locator('#panel-borrow .frame');
-  await frame.getByRole('button', { name: 'Half size' }).click();
-  await expect(frame).toHaveAttribute('data-size', 'half');
-  await expect(frame.getByRole('button', { name: 'Half size' })).toHaveAttribute('aria-pressed', 'true');
+  await frame.getByRole('button', { name: 'Full size' }).click();
+  await expect(frame).toHaveAttribute('data-size', 'full');
+  await expect(frame.getByRole('button', { name: 'Full size' })).toHaveAttribute('aria-pressed', 'true');
 });
 
 test('directory filters, live count, empty state', async ({ page }) => {

@@ -96,7 +96,7 @@ nav.top ul { list-style: none; display: flex; gap: 1rem; flex-wrap: wrap; paddin
 .human li { padding: .5rem 0; border-top: 1px solid var(--line); }
 
 /* Swimlane frame */
-.frame { border: 2px solid var(--dark-grey); border-radius: 12px; background: var(--white); margin-top: 1.5rem; overflow: hidden; }
+.frame { border: 2px solid var(--dark-grey); border-radius: 12px; background: var(--white); margin-top: .5rem; overflow: hidden; }
 .frame-bar { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap; background: var(--dark-grey); color: var(--white); padding: .6rem 1rem; }
 .frame-bar p { margin: 0; font-weight: 700; }
 .frame-bar .toggle { background: var(--white); }
@@ -134,9 +134,9 @@ nav.top ul { list-style: none; display: flex; gap: 1rem; flex-wrap: wrap; paddin
 .sw.team { background: #f1e6fd; }
 .sw.noact { background: var(--white); border: 3px solid var(--turquoise); }
 .lg-frame { --u: 15px; font-size: var(--u); }
-.frame[data-size="half"] .lg-frame { --u: 8px; }
+.frame[data-size="half"] .lg-frame { --u: 10px; }
 .lg-bands { display: flex; margin-bottom: .5em; }
-.lg-band { flex: none; box-sizing: border-box; text-align: center; font-weight: 700; font-size: .85em; border-bottom: 3px solid var(--bright-green); padding-bottom: .2em; }
+.lg-band { flex: none; box-sizing: border-box; text-align: center; font-weight: 700; font-size: 1em; border-bottom: 3px solid var(--bright-green); padding-bottom: .2em; }
 .lg { position: relative; display: grid; width: max-content; padding-right: 0; border-top: 2px solid var(--dark-grey); border-bottom: 2px solid var(--dark-grey); }
 .lg-stripe { grid-column: 1 / -1; z-index: 0; border-bottom: 1px solid var(--line); }
 .lg-stripe.team, .lg-stripe.partner { background: var(--white); }
@@ -215,3 +215,4 @@ footer { padding: 2rem 0; border-top: 1px solid var(--line); font-size: .9rem; }
 .reg table { width: 100%; border-collapse: collapse; font-size: .95rem; }
 .reg th, .reg td { text-align: left; vertical-align: top; padding: .5rem .6rem; border-bottom: 1px solid var(--line); }
 .reg code { font-size: .85rem; word-break: break-word; }
+.lg-band span { font-size: 1.1em; }

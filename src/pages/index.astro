@@ -56,13 +56,6 @@ const hl = (label: string) => label;
   <section id="usecases" aria-labelledby="uc-h">
     <div class="wrap">
       <h2 id="uc-h">How it works</h2>
-      <p class="lede">Nothing is a black box. Each journey is a swimlane: what the member does by hand, what Credit Union staff do by hand, what Singlify runs, and what third parties do.</p>
-      <Placeholder item="process-count" />
-      <ol class="steps">
-        <li><strong>The member acts in the CUApps app.</strong> Every member task happens there.</li>
-        <li><strong>Singlify asks the partner to do its step.</strong> Partners connect only to Singlify.</li>
-        <li><strong>The result comes back to Singlify.</strong> It either moves on automatically or becomes a manual task for Credit Union staff.</li>
-      </ol>
       <div class="tablist" role="tablist" aria-label="Journeys">
         {FLOW_KEYS.map((k, i) => (
           <button type="button" class="tab" role="tab" id={`tab-${k}`} aria-controls={`panel-${k}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-flow={k}>{useCases[k].label}</button>
@@ -72,7 +65,8 @@ const hl = (label: string) => label;
         const uc = useCases[k];
         return (
           <div class="uc" role="tabpanel" id={`panel-${k}`} aria-labelledby={`tab-${k}`} hidden={i !== 0} tabindex="0">
-            <div class="uc-grid">
+            <Swimlane flow={flows[k]} caption={`${uc.label}: ${uc.title.toLowerCase()}`} />
+            <div class="uc-grid" style="margin-top:1.5rem">
               <div>
                 <h3>{uc.title}</h3>
                 <p>{uc.job}</p>
@@ -86,10 +80,16 @@ const hl = (label: string) => label;
                 <ul>{uc.human.map((h: any) => <li><strong>{h.t}</strong><br />{h.d}</li>)}</ul>
               </aside>
             </div>
-            <Swimlane flow={flows[k]} caption={`${uc.label}: ${uc.title.toLowerCase()}`} />
           </div>
         );
       })}
+      <p class="lede" style="margin-top:2rem">Nothing is a black box. Each journey is a swimlane: what the member does by hand, what Credit Union staff do by hand, what Singlify runs, and what third parties do.</p>
+      <ol class="steps">
+        <li><strong>The member acts in the CUApps app.</strong> Every member task happens there.</li>
+        <li><strong>Singlify asks the partner to do its step.</strong> Partners connect only to Singlify.</li>
+        <li><strong>The result comes back to Singlify.</strong> It either moves on automatically or becomes a manual task for Credit Union staff.</li>
+      </ol>
+      <Placeholder item="process-count" />
     </div>
   </section>
 

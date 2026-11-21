@@ -5,7 +5,7 @@ import StageList from './StageList.astro';
 import Placeholder from '../Placeholder.astro';
 const { flow, caption } = Astro.props as { flow: Flow; caption: string };
 ---
-<div class="frame" data-size="full" data-view="lanes">
+<div class="frame" data-size="half" data-view="lanes">
   <div class="frame-bar">
     <p>{caption}</p>
     <div class="controls">
@@ -14,8 +14,8 @@ const { flow, caption } = Astro.props as { flow: Flow; caption: string };
         <button type="button" class="toggle" data-view="list" aria-pressed="false">Step list</button>
       </div>
       <div class="sizes" role="group" aria-label="Diagram size" data-sizes>
-        <button type="button" class="toggle" data-size="full" aria-pressed="true">Full size</button>
-        <button type="button" class="toggle" data-size="half" aria-pressed="false">Half size</button>
+        <button type="button" class="toggle" data-size="full" aria-pressed="false">Full size</button>
+        <button type="button" class="toggle" data-size="half" aria-pressed="true">Half size</button>
       </div>
     </div>
   </div>
