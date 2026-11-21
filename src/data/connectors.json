@@ -247,7 +247,7 @@
         },
         {
           "name": "GoCardless",
-          "role": "Takes the joining payment and sets up the Direct Debit"
+          "role": "Takes the joining fee by Pay by Bank, an instant payment, and sets up the loan’s Direct Debit"
         },
         {
           "name": "Lending Metrics",
@@ -286,7 +286,7 @@
         },
         {
           "name": "GoCardless",
-          "role": "Takes the joining payment"
+          "role": "Takes the joining fee by Pay by Bank, an instant payment"
         }
       ]
     },

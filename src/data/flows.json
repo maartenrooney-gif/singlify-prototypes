@@ -33,9 +33,10 @@
     },
     "join.payment": {
       "title": "Joining payment taken",
+      "note": "Processed instantly against the member’s account",
       "attach": [
-        { "lane": "member", "manual": true, "text": "Pays the joining fee" },
-        { "lane": "partner", "name": "GoCardless", "text": "Takes the joining payment" }
+        { "lane": "member", "manual": true, "text": "Pays the joining fee by Pay by Bank" },
+        { "lane": "partner", "name": "GoCardless", "text": "Takes the joining fee by Pay by Bank, an instant payment" }
       ]
     },
     "join.approved": {
@@ -97,14 +98,14 @@
         { "label": "Contract and pay out", "from": 6, "to": 7 }
       ],
       "notes": [
-        { "item": "joining-payment" },
+        { "item": "contract-signing" },
         { "item": "auto-decision" },
         { "item": "declines" }
       ]
     },
     "join": {
       "stages": ["join.created", "join.identity", "join.payment", "join.approved"],
-      "notes": [{ "item": "joining-payment" }]
+      "notes": []
     },
     "loan": {
       "stages": ["loan.created", "loan.checks", "loan.decision", "loan.contract", "loan.payout"],

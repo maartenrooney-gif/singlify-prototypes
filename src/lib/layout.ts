@@ -7,7 +7,7 @@ export const COL_W = 12.4;
 export const CARD_W = 11.2;
 export const S_INSET = 1.1; // Singlify cards are narrower, leaving room for the spine arrow
 export const PAD = 2.1; // space above and below cards inside a lane (arrows live here)
-export const CARD_H: Record<Lane, number> = { member: 5.6, team: 10.6, singlify: 6.6, partner: 6.4 };
+export const CARD_H: Record<Lane, number> = { member: 5.6, team: 10.6, singlify: 7.8, partner: 6.4 };
 
 export interface Arrow { d: string; kind: 'blue' | 'grey'; dashed: boolean; spine?: boolean }
 
