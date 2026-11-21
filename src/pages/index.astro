@@ -45,7 +45,7 @@ const hl = (label: string) => label;
             <ul>{o.member.map((m) => <li><Text text={m} /></li>)}</ul>
             <h4>For your team</h4>
             <ul>{o.team.map((m) => <li>{m}</li>)}</ul>
-            <p style="margin-top:1.2rem"><button type="button" class="btn" data-open-flow={o.key}>See this journey</button></p>
+            <p style="margin-top:1.2rem"><a class="btn" href="#usecases" data-open-flow={o.key}>See this journey</a></p>
           </article>
         ))}
       </div>
@@ -227,10 +227,8 @@ const hl = (label: string) => label;
     });
   });
   $$('[data-open-flow]').forEach((b) => b.addEventListener('click', () => {
+    // Plain anchor link: the browser scrolls (reliable inside embedded viewers); we only switch the tab.
     selectTab(b.dataset.openFlow!);
-    const el = document.getElementById('usecases')!;
-    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
-    document.getElementById(`tab-${b.dataset.openFlow}`)?.focus({ preventScroll: true });
   }));
 
   // Full / half size
