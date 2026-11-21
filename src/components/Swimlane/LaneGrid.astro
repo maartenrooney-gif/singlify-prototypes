@@ -21,7 +21,7 @@ const uid = `m-${flow.key}`;
         })}
       </div>
     )}
-    <div class="lg" style={`grid-template-columns:${cols};grid-template-rows:${rows}`} role="group" aria-label="Swimlane diagram. The same steps are listed in order in the stage list for narrow screens.">
+    <div class="lg" style={`grid-template-columns:${cols};grid-template-rows:${rows}`} role="group" aria-label="Swimlane diagram. Switch to Step list for the same steps in order.">
       {flow.lanes.map((l, i) => (
         <>
           <div class="lg-stripe" style={`grid-row:${i + 1}`}></div>
@@ -41,7 +41,7 @@ const uid = `m-${flow.key}`;
         <>
           <Card kind="singlify" name={s.title} text={s.note} tag={`Stage ${i + 1}`} style={`grid-row:${sRow + 1};grid-column:${s.colStart + 2} / span ${s.span}`} />
           {s.attach.map((a) => (
-            <Card kind={a.lane === 'member' ? 'member' : a.lane === 'team' ? 'team' : 'partner'} name={a.name} text={a.text} human={a.human} style={`grid-row:${row(a.lane) + 1};grid-column:${a.col + 2}`} />
+            <Card kind={a.lane === 'member' ? 'member' : a.lane === 'team' ? 'team' : 'partner'} name={a.name} text={a.text} human={a.human} manual={a.manual} style={`grid-row:${row(a.lane) + 1};grid-column:${a.col + 2}`} />
           ))}
         </>
       ))}

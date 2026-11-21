@@ -1,16 +1,16 @@
 {
   "_note": "Swimlane data. Built only from handover section 4 and connectors.json. Stage names, member actions and partner roles come from those sources. Anything not specified there is left out or marked in open-items.json.",
   "lanes": {
-    "member": { "label": "Member", "sub": "In the CUApps app" },
-    "team": { "label": "Your team", "sub": "In Singlify" },
+    "member": { "label": "Member", "sub": "Manual actions, in the CUApps app" },
+    "team": { "label": "Credit Union staff", "sub": "Manual tasks, in Singlify" },
     "singlify": { "label": "Singlify", "sub": "The process" },
-    "partner": { "label": "Partners", "sub": "Connect only to Singlify" }
+    "partner": { "label": "Third Party", "sub": "Connects only to Singlify" }
   },
   "humanSteps": {
     "identity": {
       "short": "Identity check fails",
       "t": "An identity check fails",
-      "d": "Your team reviews it and approves, or follows up with the member."
+      "d": "Credit Union staff review it and approves, or follows up with the member."
     },
     "referred": {
       "short": "Application referred",
@@ -22,7 +22,7 @@
     "join.created": {
       "title": "Application created",
       "note": "Stage: Submitted",
-      "attach": [{ "lane": "member", "text": "Joins and enters details" }]
+      "attach": [{ "lane": "member", "manual": true, "text": "Joins and enters details" }]
     },
     "join.identity": {
       "title": "Identity checked",
@@ -34,18 +34,18 @@
     "join.payment": {
       "title": "Joining payment taken",
       "attach": [
-        { "lane": "member", "text": "Pays the joining fee" },
+        { "lane": "member", "manual": true, "text": "Pays the joining fee" },
         { "lane": "partner", "name": "GoCardless", "text": "Takes the joining payment" }
       ]
     },
     "join.approved": {
       "title": "Membership approved",
       "note": "Account opened, welcome email",
-      "attach": [{ "lane": "member", "text": "Becomes a member (told in the app)" }]
+      "attach": [{ "lane": "member", "manual": false, "text": "Becomes a member (told in the app)" }]
     },
     "loan.created": {
       "title": "Application created",
-      "attach": [{ "lane": "member", "text": "Applies" }]
+      "attach": [{ "lane": "member", "manual": true, "text": "Applies" }]
     },
     "loan.checks": {
       "title": "Credit and bank checked",
@@ -65,7 +65,7 @@
       "title": "Contract signed",
       "note": "Stage: Contract issued",
       "attach": [
-        { "lane": "member", "text": "Accepts the offer" },
+        { "lane": "member", "manual": true, "text": "Accepts the offer" },
         { "lane": "partner", "name": "PDF Butler and SIGN Butler", "text": "Create the contract and get it signed online" }
       ]
     },
@@ -73,7 +73,7 @@
       "title": "Loan paid out",
       "note": "Stage: Loan disbursed",
       "attach": [
-        { "lane": "member", "text": "Receives the loan" },
+        { "lane": "member", "manual": false, "text": "Receives the loan" },
         { "lane": "partner", "name": "GoCardless", "text": "Sets up the Direct Debit, if they pay that way" }
       ]
     },

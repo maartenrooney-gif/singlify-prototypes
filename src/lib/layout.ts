@@ -3,7 +3,7 @@ import type { Flow, Lane } from './data';
 export const LABEL_W = 7.5;
 export const COL_W = 12.6;
 export const CARD_W = 11.4;
-export const CARD_H = 9.6;
+export const CARD_H = 11;
 export const GAP = 3.4;
 export const PITCH = CARD_H + GAP;
 export const INSET = (COL_W - CARD_W) / 2;

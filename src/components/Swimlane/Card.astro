@@ -1,12 +1,24 @@
 ---
 import Text from '../Text.astro';
 import { humanSteps } from '../../lib/data';
-const { kind, name, text, human, tag, style } = Astro.props as { kind: 'member' | 'singlify' | 'team' | 'partner'; name?: string; text?: string; human?: string; tag?: string; style?: string };
+// kind: member | singlify | team | partner
+// manual: for member cards, true when the member has to do something themselves
+const { kind, name, text, human, manual, tag, style } = Astro.props as {
+  kind: 'member' | 'singlify' | 'team' | 'partner';
+  name?: string; text?: string; human?: string; manual?: boolean; tag?: string; style?: string;
+};
 const h = human ? humanSteps[human] : undefined;
+const isManual = kind === 'team' || (kind === 'member' && manual === true);
+const cls = ['card', kind, isManual ? 'is-manual' : '', kind === 'member' && !isManual ? 'no-action' : ''].join(' ');
+const who = kind === 'member' ? 'Member' : kind === 'team' ? 'Staff, only sometimes' : '';
 ---
-<div class={`card ${kind}`} style={style}>
+<div class={cls} style={style}>
+  {isManual && (
+    <span class="badge-row"><span class="pill">Manual</span><span class="who">{who}</span></span>
+  )}
+  {kind === 'member' && !isManual && <span class="badge-row"><span class="pill quiet">No action</span><span class="who">Member</span></span>}
   {tag && <span class="tag">{tag}</span>}
   {h
-    ? (<><span class="tag">Only sometimes</span><span class="nm">{h.short}</span>{h.d}</>)
+    ? (<><span class="nm">{h.short}</span>{h.d}</>)
     : (<>{name && <span class="nm">{name}</span>}{text && <Text text={text} />}</>)}
 </div>

@@ -19,8 +19,7 @@ for (const v of widths) {
       await page.goto('/');
       const grid = page.locator('#panel-borrow .lanegrid-wrap');
       const list = page.locator('#panel-borrow .stagelist-wrap');
-      if (v.w >= 900) { await expect(grid).toBeVisible(); await expect(list).toBeHidden(); }
-      else { await expect(list).toBeVisible(); await expect(grid).toBeHidden(); }
+      await expect(grid).toBeVisible(); await expect(list).toBeHidden();
     });
   });
 }
@@ -47,7 +46,7 @@ test('tabs: default, keyboard, outcome buttons', async ({ page }) => {
 test('flow counts match the handover (8, 4, 5 stages)', async ({ page }) => {
   await page.goto('/');
   for (const [k, n] of [['borrow', 8], ['join', 4], ['loan', 5]] as const) {
-    await expect(page.locator(`#panel-${k} .sl-stage`)).toHaveCount(n);
+    await expect(page.locator(`#panel-${k} .lanegrid-wrap .card.singlify`)).toHaveCount(n);
   }
 });
 
@@ -79,9 +78,18 @@ test('every directory row carries the live-status placeholder', async ({ page })
 
 test('axe clean on every journey tab', async ({ page }) => {
   await page.goto('/');
-  for (const k of ['join', 'loan', 'ways']) {
+  for (const k of ['join', 'loan']) {
     await page.locator(`#tab-${k}`).click();
     const res = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
     expect(res.violations.map((x) => x.id), k).toEqual([]);
   }
+});
+
+test('manual actions are badged: member and staff', async ({ page }) => {
+  await page.goto('/');
+  const grid = page.locator('#panel-borrow .lanegrid-wrap');
+  await expect(grid.locator('.card.member.is-manual .pill')).toHaveCount(3); // joins, pays joining fee, accepts offer
+  await expect(grid.locator('.card.team .pill')).toHaveCount(2); // identity fails, application referred
+  await expect(grid.locator('.card.member.no-action')).toHaveCount(2); // told in app, receives loan
+  await expect(grid.locator('.card.singlify .pill, .card.partner .pill')).toHaveCount(0);
 });

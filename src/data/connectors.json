@@ -224,12 +224,12 @@
       "label": "Join and borrow",
       "title": "A new member joins and borrows",
       "job": "Someone joins your credit union and asks for a loan in the same sitting.",
-      "team": "Your team steps in only when an identity check fails, or when an application is not an auto-accept or an auto-decline.",
+      "team": "Credit Union staff step in only when an identity check fails, or when an application is not an auto-accept or an auto-decline.",
       "stagesLine": "Of 8 stages, only 2 can need a person, and only sometimes.",
       "human": [
         {
           "t": "An identity check fails",
-          "d": "Your team reviews it and approves, or follows up with the member."
+          "d": "Credit Union staff review it and approves, or follows up with the member."
         },
         {
           "t": "An application is not an auto-accept or an auto-decline",
@@ -267,12 +267,12 @@
       "label": "Join and save",
       "title": "A new member joins and starts saving",
       "job": "Someone becomes a member and opens an account.",
-      "team": "Your team steps in only if an identity check fails.",
+      "team": "Credit Union staff step in only if an identity check fails.",
       "stagesLine": "Of 4 stages, only 1 can need a person, and only sometimes.",
       "human": [
         {
           "t": "An identity check fails",
-          "d": "Your team reviews it and approves, or follows up with the member."
+          "d": "Credit Union staff review it and approves, or follows up with the member."
         }
       ],
       "plug": [
@@ -291,10 +291,10 @@
       ]
     },
     "loan": {
-      "label": "Existing member borrows",
+      "label": "New loan for existing member",
       "title": "An existing member borrows",
       "job": "A member applies for a loan from their app or your website.",
-      "team": "Your team reviews only the applications that are not an auto-accept or an auto-decline.",
+      "team": "Credit Union staff review only the applications that are not an auto-accept or an auto-decline.",
       "stagesLine": "Of 5 stages, only 1 can need a person, and only sometimes.",
       "human": [
         {

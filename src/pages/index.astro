@@ -7,8 +7,8 @@ import { connectors, routes, choices, appExamples, useCases, flows, humanSteps, 
 
 const memberActions = (key: string) => flows[key].stages.flatMap((s) => s.attach.filter((a) => a.lane === 'member').map((a) => a.text!));
 const outcomes = [
-  { key: 'join', title: 'A new member joins', job: useCases.join.job, member: memberActions('join'), team: [humanSteps.identity.d.replace('Your team reviews it', 'Your team reviews the check, only if identity is not confirmed').replace(' and approves, or follows up with the member.', '.')] },
-  { key: 'loan', title: 'An existing member borrows', job: useCases.loan.job, member: memberActions('loan'), team: ['Your team reviews only the applications that are not an auto-accept or an auto-decline.', humanSteps.referred.d] },
+  { key: 'join', title: 'A new member joins', job: useCases.join.job, member: memberActions('join'), team: ['Credit Union staff review the check, only if identity is not confirmed.'] },
+  { key: 'loan', title: 'An existing member borrows', job: useCases.loan.job, member: memberActions('loan'), team: ['Credit Union staff review only the applications that are not an auto-accept or an auto-decline.', humanSteps.referred.d] },
 ];
 const promises = [
   { t: 'A smooth start for new members', d: 'New members join in the app. Checks happen behind the scenes.' },
@@ -21,7 +21,7 @@ const hl = (label: string) => label;
   <section class="hero">
     <div class="wrap">
       <h1 class="headline"><i>Maximise your engagement,</i> <b><i>Singlify your systems.</i></b></h1>
-      <p class="lede">New members join in the app. Existing members apply for a loan in the app. Checks and payout happen behind the scenes, and your team steps in only where a person makes a difference.</p>
+      <p class="lede">New members join in the app. Existing members apply for a loan in the app. Checks and payout happen behind the scenes, and Credit Union staff step in only where a person makes a difference.</p>
       <div class="btns">
         <a class="btn" href="#usecases">See how it works</a>
         <a class="btn alt" href="#partners">Meet the partners</a>
@@ -43,7 +43,7 @@ const hl = (label: string) => label;
             <p>{o.job}</p>
             <h4>For your member</h4>
             <ul>{o.member.map((m) => <li><Text text={m} /></li>)}</ul>
-            <h4>For your team</h4>
+            <h4>For Credit Union staff</h4>
             <ul>{o.team.map((m) => <li>{m}</li>)}</ul>
             <p style="margin-top:1.2rem"><a class="btn" href="#usecases" data-open-flow={o.key}>See this journey</a></p>
           </article>
@@ -56,12 +56,12 @@ const hl = (label: string) => label;
   <section id="usecases" aria-labelledby="uc-h">
     <div class="wrap">
       <h2 id="uc-h">How it works</h2>
-      <p class="lede">Nothing is a black box. Pick a journey to see who does what at each stage.</p>
+      <p class="lede">Nothing is a black box. Each journey is a swimlane: what the member does by hand, what Credit Union staff do by hand, what Singlify runs, and what third parties do.</p>
       <Placeholder item="process-count" />
       <ol class="steps">
         <li><strong>The member acts in the CUApps app.</strong> Every member task happens there.</li>
         <li><strong>Singlify asks the partner to do its step.</strong> Partners connect only to Singlify.</li>
-        <li><strong>The result comes back to Singlify.</strong> It either moves on automatically or becomes a task for your team.</li>
+        <li><strong>The result comes back to Singlify.</strong> It either moves on automatically or becomes a manual task for Credit Union staff.</li>
       </ol>
       <div class="tablist" role="tablist" aria-label="Journeys">
         {FLOW_KEYS.map((k, i) => (
@@ -77,7 +77,7 @@ const hl = (label: string) => label;
                 <h3>{uc.title}</h3>
                 <p>{uc.job}</p>
                 <p><strong>{uc.team}</strong> {k === 'borrow' || k === 'loan' ? <Placeholder item="auto-decision" inline /> : null}</p>
-                <h4>Partners that plug in</h4>
+                <h4>Third parties that plug in</h4>
                 <ul class="plug">{uc.plug.map((p: any) => <li><strong>{p.name}</strong>{p.role}</li>)}</ul>
               </div>
               <aside class="human" aria-label="Human steps">
@@ -236,6 +236,15 @@ const hl = (label: string) => label;
     const frame = g.closest<HTMLElement>('.frame')!;
     $$('button', g).forEach((b) => b.addEventListener('click', () => {
       frame.dataset.size = b.dataset.size;
+      $$('button', g).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    }));
+  });
+
+  // Swimlane / step list view
+  $$('[data-views]').forEach((g) => {
+    const frame = g.closest<HTMLElement>('.frame')!;
+    $$('button', g).forEach((b) => b.addEventListener('click', () => {
+      frame.dataset.view = b.dataset.view;
       $$('button', g).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     }));
   });

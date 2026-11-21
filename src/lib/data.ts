@@ -12,6 +12,7 @@ export interface Attachment {
   name?: string;
   text?: string;
   human?: string;
+  manual?: boolean;
   col: number; // absolute column index (0-based) in the flow
 }
 export interface Stage { id: string; title: string; note?: string; colStart: number; span: number; attach: Attachment[] }
@@ -63,7 +64,7 @@ function resolveFlow(key: string): Flow {
   };
 }
 
-export const FLOW_KEYS = ['borrow', 'join', 'loan', 'ways'] as const;
+export const FLOW_KEYS = ['borrow', 'join', 'loan'] as const;
 export const flows: Record<string, Flow> = Object.fromEntries(FLOW_KEYS.map((k) => [k, resolveFlow(k)]));
 
 // ---- Build-time validation: fail loudly rather than ship inconsistent content ----

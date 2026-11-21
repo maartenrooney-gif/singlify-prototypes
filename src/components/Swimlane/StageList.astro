@@ -19,9 +19,9 @@ const bandAt = (i: number) => flow.bands?.find((b) => b.from === i)?.label;
               <div class="att">
                 <p class="pair">
                   <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true" focusable="false"><path d="M6 15V2M6 2L2.5 6M6 2L9.5 6M16 1v13M16 14l-3.5-4M16 14l3.5-4" fill="none" stroke-width="1.6" stroke-linecap="round" style={`stroke:${l === 'team' ? 'var(--dark-grey)' : 'var(--dark-blue)'}`} /></svg>
-                  <span>{l === 'member' ? 'Member and Singlify, both ways' : l === 'team' ? 'Singlify and your team, both ways' : 'Singlify and partner, both ways'}</span>
+                  <span>{l === 'member' ? 'Member and Singlify, both ways' : l === 'team' ? 'Singlify and Credit Union staff, both ways' : 'Singlify and third party, both ways'}</span>
                 </p>
-                <Card kind={l === 'member' ? 'member' : l === 'team' ? 'team' : 'partner'} name={a.name} text={a.text} human={a.human} tag={l === 'member' ? 'Member · CUApps app' : undefined} />
+                <Card kind={l === 'member' ? 'member' : l === 'team' ? 'team' : 'partner'} name={a.name} text={a.text} human={a.human} manual={a.manual} />
               </div>
             ));
           })}

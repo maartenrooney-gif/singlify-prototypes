@@ -5,25 +5,32 @@ import StageList from './StageList.astro';
 import Placeholder from '../Placeholder.astro';
 const { flow, caption } = Astro.props as { flow: Flow; caption: string };
 ---
-<div class="frame" data-size="full">
+<div class="frame" data-size="full" data-view="lanes">
   <div class="frame-bar">
     <p>{caption}</p>
-    <div class="sizes" role="group" aria-label="Diagram size" data-sizes>
-      <button type="button" class="toggle" data-size="full" aria-pressed="true">Full size</button>
-      <button type="button" class="toggle" data-size="half" aria-pressed="false">Half size</button>
+    <div class="controls">
+      <div class="views" role="group" aria-label="View" data-views>
+        <button type="button" class="toggle" data-view="lanes" aria-pressed="true">Swimlane</button>
+        <button type="button" class="toggle" data-view="list" aria-pressed="false">Step list</button>
+      </div>
+      <div class="sizes" role="group" aria-label="Diagram size" data-sizes>
+        <button type="button" class="toggle" data-size="full" aria-pressed="true">Full size</button>
+        <button type="button" class="toggle" data-size="half" aria-pressed="false">Half size</button>
+      </div>
     </div>
   </div>
-  <div class="scroller" tabindex="0" role="region" aria-label={`${caption}: scrolls sideways on small screens`}>
+  <ul class="legend legend-top" aria-label="Key">
+    <li><span class="sw member"><b>MANUAL</b></span>Manual action by the member, in the app</li>
+    <li><span class="sw noact"></span>Member is told or receives something (no action)</li>
+    <li><span class="sw team"><b>MANUAL</b></span>Manual action by Credit Union staff (only sometimes)</li>
+    <li><span class="sw singlify"></span>Singlify</li>
+    <li><span class="sw partner"></span>Third party</li>
+  </ul>
+  <p class="hint">Anything without a MANUAL badge runs without a person. Every hand-off between lanes is a pair of arrows, one each way.</p>
+  <div class="scroller" tabindex="0" role="region" aria-label={`${caption}: scrolls sideways`}>
     <LaneGrid flow={flow} />
     <StageList flow={flow} />
   </div>
-  <ul class="legend" aria-label="Key">
-    <li><span class="sw member"></span>Member, in the CUApps app</li>
-    <li><span class="sw singlify"></span>Singlify</li>
-    <li><span class="sw team"></span>Your team (only sometimes)</li>
-    <li><span class="sw partner"></span>Partner</li>
-    <li>Every hand-off is a pair of arrows, one each way</li>
-  </ul>
   {flow.notes.length > 0 && (
     <div class="notes">
       {flow.notes.map((n) => (n.item ? <Placeholder item={n.item} /> : <p>{n.text}</p>))}
