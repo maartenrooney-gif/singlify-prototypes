@@ -1,18 +1,19 @@
 ---
-import { lanes, type Flow } from '../../lib/data';
-import { layout, COL_W, LABEL_W, CARD_H, GAP } from '../../lib/layout';
+import { lanes, type Flow, type Lane } from '../../lib/data';
+import { layout, COL_W, LABEL_W, CARD_W, CARD_H, S_INSET } from '../../lib/layout';
 import Card from './Card.astro';
 const { flow } = Astro.props as { flow: Flow };
-const { gridW, gridH, arrows, row } = layout(flow);
+const { gridW, gridH, laneH, arrows, row } = layout(flow);
 const sRow = row('singlify');
 const cols = `${LABEL_W}em repeat(${flow.cols}, ${COL_W}em)`;
-const rows = `repeat(${flow.lanes.length}, ${CARD_H}em)`;
+const rows = laneH.map((h) => `${h}em`).join(' ');
 const uid = `m-${flow.key}`;
+const size = (l: Lane) => `height:${CARD_H[l]}em;`;
 ---
 <div class="lanegrid-wrap">
   <div class="lg-frame">
     {flow.bands && (
-      <div class="lg-bands" aria-hidden="true">
+      <div class="lg-bands" aria-hidden="true" style={`margin-left:${LABEL_W}em`}>
         {flow.bands.map((b) => {
           const from = flow.stages[b.from].colStart;
           const last = flow.stages[b.to];
@@ -24,24 +25,25 @@ const uid = `m-${flow.key}`;
     <div class="lg" style={`grid-template-columns:${cols};grid-template-rows:${rows}`} role="group" aria-label="Swimlane diagram. Switch to Step list for the same steps in order.">
       {flow.lanes.map((l, i) => (
         <>
-          <div class="lg-stripe" style={`grid-row:${i + 1}`}></div>
-          <div class="lg-label" style={`grid-row:${i + 1};grid-column:1`}><strong>{lanes[l].label}</strong><span>{lanes[l].sub}</span></div>
+          <div class={`lg-stripe ${l}`} style={`grid-row:${i + 1}`}></div>
+          <div class={`lg-label ${l}`} style={`grid-row:${i + 1};grid-column:1`}><strong>{lanes[l].label}</strong><span>{lanes[l].sub}</span></div>
         </>
       ))}
       <svg width={`${gridW}em`} height={`${gridH}em`} viewBox={`0 0 ${gridW} ${gridH}`} aria-hidden="true" focusable="false">
         <defs>
-          <marker id={`${uid}-blue`} markerUnits="userSpaceOnUse" markerWidth="1" markerHeight="1" refX="1" refY="0.5" orient="auto"><path d="M0 0 L1 0.5 L0 1 Z" style="fill:var(--dark-blue)" /></marker>
-          <marker id={`${uid}-grey`} markerUnits="userSpaceOnUse" markerWidth="1" markerHeight="1" refX="1" refY="0.5" orient="auto"><path d="M0 0 L1 0.5 L0 1 Z" style="fill:var(--dark-grey)" /></marker>
+          <marker id={`${uid}-blue`} markerUnits="userSpaceOnUse" markerWidth="0.9" markerHeight="0.9" refX="0.9" refY="0.45" orient="auto"><path d="M0 0 L0.9 0.45 L0 0.9 Z" style="fill:var(--dark-blue)" /></marker>
+          <marker id={`${uid}-grey`} markerUnits="userSpaceOnUse" markerWidth="0.9" markerHeight="0.9" refX="0.9" refY="0.45" orient="auto"><path d="M0 0 L0.9 0.45 L0 0.9 Z" style="fill:var(--dark-grey)" /></marker>
+          <marker id={`${uid}-spine`} markerUnits="userSpaceOnUse" markerWidth="1.3" markerHeight="1.3" refX="1.3" refY="0.65" orient="auto"><path d="M0 0 L1.3 0.65 L0 1.3 Z" style="fill:var(--dark-grey)" /></marker>
         </defs>
         {arrows.map((a) => (
-          <path d={a.d} fill="none" stroke-width="0.14" stroke-dasharray={a.dashed ? '0.5 0.35' : undefined} style={`stroke:${a.kind === 'blue' ? 'var(--dark-blue)' : 'var(--dark-grey)'}`} marker-end={`url(#${uid}-${a.kind})`} />
+          <path d={a.d} fill="none" stroke-width={a.spine ? '0.32' : '0.13'} stroke-dasharray={a.dashed ? '0.45 0.3' : undefined} style={`stroke:${a.kind === 'blue' ? 'var(--dark-blue)' : 'var(--dark-grey)'}`} marker-end={`url(#${uid}-${a.spine ? 'spine' : a.kind})`} />
         ))}
       </svg>
       {flow.stages.map((s, i) => (
         <>
-          <Card kind="singlify" name={s.title} text={s.note} tag={`Stage ${i + 1}`} style={`grid-row:${sRow + 1};grid-column:${s.colStart + 2} / span ${s.span}`} />
+          <Card kind="singlify" name={s.title} text={s.note} tag={`Stage ${i + 1}`} style={`grid-row:${sRow + 1};grid-column:${s.colStart + 2} / span ${s.span};${size('singlify')}margin:0 ${S_INSET}em`} />
           {s.attach.map((a) => (
-            <Card kind={a.lane === 'member' ? 'member' : a.lane === 'team' ? 'team' : 'partner'} name={a.name} text={a.text} human={a.human} manual={a.manual} style={`grid-row:${row(a.lane) + 1};grid-column:${a.col + 2}`} />
+            <Card kind={a.lane === 'member' ? 'member' : a.lane === 'team' ? 'team' : 'partner'} name={a.name} text={a.text} human={a.human} manual={a.manual} style={`grid-row:${row(a.lane) + 1};grid-column:${a.col + 2};width:${CARD_W}em;${size(a.lane)}`} />
           ))}
         </>
       ))}

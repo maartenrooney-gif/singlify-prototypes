@@ -20,13 +20,13 @@ const { flow, caption } = Astro.props as { flow: Flow; caption: string };
     </div>
   </div>
   <ul class="legend legend-top" aria-label="Key">
-    <li><span class="sw member"><b>MANUAL</b></span>Manual action by the member, in the app</li>
-    <li><span class="sw noact"></span>Member is told or receives something (no action)</li>
-    <li><span class="sw team"><b>MANUAL</b></span>Manual action by Credit Union staff (only sometimes)</li>
+    <li><span class="sw member"><b>MANUAL</b></span>Member does something</li>
+    <li><span class="sw noact"></span>Member is told or receives (no action)</li>
+    <li><span class="sw team"><b>MANUAL</b></span>Credit Union staff do something (only sometimes)</li>
     <li><span class="sw singlify"></span>Singlify</li>
     <li><span class="sw partner"></span>Third party</li>
   </ul>
-  <p class="hint">Anything without a MANUAL badge runs without a person. Every hand-off between lanes is a pair of arrows, one each way.</p>
+  <p class="hint">No MANUAL badge means no person is involved. Each hand-off is a pair of arrows: Singlify asks, the result comes back.</p>
   <div class="scroller" tabindex="0" role="region" aria-label={`${caption}: scrolls sideways`}>
     <LaneGrid flow={flow} />
     <StageList flow={flow} />
