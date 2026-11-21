@@ -1,0 +1,32 @@
+---
+import { lanes, LANE_ORDER, type Flow } from '../../lib/data';
+import Card from './Card.astro';
+const { flow } = Astro.props as { flow: Flow };
+const bandAt = (i: number) => flow.bands?.find((b) => b.from === i)?.label;
+---
+<div class="stagelist-wrap">
+  <ol class="sl">
+    {flow.stages.map((s, i) => (
+      <>
+        {bandAt(i) && <li class="sl-band" aria-hidden="true">{bandAt(i)}</li>}
+        <li class="sl-stage">
+          {LANE_ORDER.map((l) => {
+            if (l === 'singlify') {
+              return <Card kind="singlify" name={`${i + 1}. ${s.title}`} text={s.note} />;
+            }
+            const list = s.attach.filter((a) => a.lane === l);
+            return list.map((a) => (
+              <div class="att">
+                <p class="pair">
+                  <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true" focusable="false"><path d="M6 15V2M6 2L2.5 6M6 2L9.5 6M16 1v13M16 14l-3.5-4M16 14l3.5-4" fill="none" stroke-width="1.6" stroke-linecap="round" style={`stroke:${l === 'team' ? 'var(--dark-grey)' : 'var(--dark-blue)'}`} /></svg>
+                  <span>{l === 'member' ? 'Member and Singlify, both ways' : l === 'team' ? 'Singlify and your team, both ways' : 'Singlify and partner, both ways'}</span>
+                </p>
+                <Card kind={l === 'member' ? 'member' : l === 'team' ? 'team' : 'partner'} name={a.name} text={a.text} human={a.human} tag={l === 'member' ? 'Member · CUApps app' : undefined} />
+              </div>
+            ));
+          })}
+        </li>
+      </>
+    ))}
+  </ol>
+</div>

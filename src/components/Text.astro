@@ -1,0 +1,6 @@
+---
+import { segments } from '../lib/placeholders.mjs';
+const { text } = Astro.props as { text: string };
+const segs = segments(text);
+---
+{segs.map((s) => (s.ph ? <mark class="ph" title="Placeholder: awaiting confirmation">{s.t}</mark> : s.t))}

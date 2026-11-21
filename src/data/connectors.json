@@ -1,0 +1,360 @@
+{
+  "_note": "Content extracted from the prototype. Every value marked \"to confirm\" or \"to map\" is a placeholder awaiting confirmation. Do not invent prices, terms or live status.",
+  "routes": {
+    "Included": "In the Singlify licence",
+    "Self-serve": "Sign up online with the partner",
+    "Contract": "Order form or contract with the partner",
+    "AppExchange": "Add from the Salesforce AppExchange"
+  },
+  "connectors": [
+    {
+      "name": "CUApps",
+      "category": "Member app and engagement",
+      "does": "Your members’ mobile app and website journeys, including joining and applying.",
+      "step": "The member’s application, in every journey",
+      "route": "Included",
+      "buy": "In your licence. Bundle price to confirm."
+    },
+    {
+      "name": "Nivo",
+      "category": "Member app and engagement",
+      "does": "Digital onboarding for new members.",
+      "step": "Joining (to confirm)",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "Mailchimp",
+      "category": "Member app and engagement",
+      "does": "Targeted emails to groups of members, driven by their Singlify record.",
+      "step": "Member communications (to map)",
+      "route": "Self-serve",
+      "buy": "Sign up online. From [price to confirm] a month."
+    },
+    {
+      "name": "Esendex",
+      "category": "Member app and engagement",
+      "does": "Text messages to members.",
+      "step": "Member communications (to map)",
+      "route": "Contract",
+      "buy": "[Self-serve or order form: to confirm]"
+    },
+    {
+      "name": "Xelion",
+      "category": "Member app and engagement",
+      "does": "Phone calls linked to the member’s record: their details appear as the phone rings.",
+      "step": "Member calls (to map)",
+      "route": "Contract",
+      "buy": "[Self-serve or order form: to confirm]"
+    },
+    {
+      "name": "Choose Wisely",
+      "category": "Member app and engagement",
+      "does": "A price comparison site that sends you loan applications from people who match your criteria.",
+      "step": "Where applications arrive from",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "Vouchsafe",
+      "category": "Identity and data",
+      "does": "Checks a new member’s identity, and reminds them if they don’t finish.",
+      "step": "Identity check, when someone joins",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "Yoti",
+      "category": "Identity and data",
+      "does": "Digital identity verification.",
+      "step": "Identity check, when someone joins",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "Data8",
+      "category": "Identity and data",
+      "does": "Checks that addresses are real and complete.",
+      "step": "Entering details (to confirm)",
+      "route": "Contract",
+      "buy": "[Self-serve or order form: to confirm]"
+    },
+    {
+      "name": "Lending Metrics",
+      "category": "Lending and savings",
+      "does": "Credit checks, open banking and bank account validation for loan applications.",
+      "step": "Credit and bank checks, when someone applies for a loan",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "Quid Finance",
+      "category": "Lending and savings",
+      "does": "Suggests accept, refer or decline on a loan application, for your team to review.",
+      "step": "The suggested decision, when someone applies for a loan",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "Credit Canary",
+      "category": "Lending and savings",
+      "does": "A loan broker platform that sends applications with credit, open banking and a decision already done.",
+      "step": "Where applications arrive from",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "NestEgg",
+      "category": "Lending and savings",
+      "does": "Payroll savings, lending decisions and applications for Lloyds Bank.",
+      "step": "Where applications arrive from (for Lloyds Bank), plus lending decisions and payroll savings",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "FinDock",
+      "category": "Payments",
+      "does": "Takes payments and matches them to your bank accounts automatically.",
+      "step": "Payments and bank matching (to map)",
+      "route": "Included",
+      "buy": "In your licence. One invoice."
+    },
+    {
+      "name": "GoCardless",
+      "category": "Payments",
+      "does": "Direct Debit and Pay by Bank payments.",
+      "step": "The joining payment and the loan’s Direct Debit",
+      "route": "Contract",
+      "buy": "Sign up with the partner. Price to confirm."
+    },
+    {
+      "name": "Access PaySuite",
+      "category": "Payments",
+      "does": "A payment service provider for collecting payments.",
+      "step": "Payments (to map)",
+      "route": "Contract",
+      "buy": "Order form with the partner. Price and term to confirm."
+    },
+    {
+      "name": "PDF Butler and SIGN Butler",
+      "category": "Documents and back-up",
+      "does": "Creates loan contracts and gets them signed online.",
+      "step": "The loan contract, when a loan is agreed",
+      "route": "Included",
+      "buy": "In your licence. One invoice."
+    },
+    {
+      "name": "Spanning",
+      "category": "Documents and back-up",
+      "does": "Backs up your Salesforce data.",
+      "step": "Runs behind every process",
+      "route": "Included",
+      "buy": "In your licence. One invoice."
+    },
+    {
+      "name": "Xero",
+      "category": "Accounting",
+      "does": "Your accounts package, kept in step with Singlify.",
+      "step": "Accounting (to map)",
+      "route": "Self-serve",
+      "buy": "Sign up online. From [price to confirm] a month."
+    }
+  ],
+  "choices": [
+    {
+      "job": "Where applications come from",
+      "where": "Used when someone applies",
+      "partners": "CUApps, NestEgg for Lloyds Bank, Credit Canary, Choose Wisely"
+    },
+    {
+      "job": "Credit checks and decisions",
+      "where": "Used when someone applies for a loan",
+      "partners": "Lending Metrics, Quid Finance, Credit Canary, NestEgg"
+    },
+    {
+      "job": "Identity checks",
+      "where": "Used when someone joins",
+      "partners": "Vouchsafe, Yoti"
+    },
+    {
+      "job": "Taking payments",
+      "where": "Used when someone joins or repays",
+      "partners": "GoCardless, Access PaySuite, FinDock"
+    },
+    {
+      "job": "Contracts and signing",
+      "where": "Used when a loan is agreed",
+      "partners": "PDF Butler and SIGN Butler, DocuSign through the AppExchange"
+    }
+  ],
+  "appExamples": [
+    {
+      "kind": "Messaging",
+      "name": "Mogli",
+      "does": "Text and WhatsApp messages sent from the member’s Salesforce record.",
+      "how": "AppExchange: monthly subscription, billed through Salesforce."
+    },
+    {
+      "kind": "AML and ID screening",
+      "name": "Shufti",
+      "does": "ID, document and anti-money-laundering checks inside Salesforce.",
+      "how": "AppExchange: monthly subscription, billed through Salesforce."
+    },
+    {
+      "kind": "AML and ID screening",
+      "name": "Onfido (now Entrust)",
+      "does": "ID and biometric checks for onboarding and KYC.",
+      "how": "AppExchange: monthly subscription, billed through Salesforce."
+    },
+    {
+      "kind": "E-signature",
+      "name": "DocuSign",
+      "does": "Sign contracts electronically. An alternative to SIGN Butler if your team already uses it.",
+      "how": "AppExchange: monthly subscription, billed through Salesforce."
+    },
+    {
+      "kind": "AI agents",
+      "name": "Salesforce Agentforce",
+      "does": "AI agents for member service and lending, from Salesforce itself. Fit with Singlify to be confirmed.",
+      "how": "Add-on from Salesforce, billed through Salesforce."
+    }
+  ],
+  "useCases": {
+    "borrow": {
+      "label": "Join and borrow",
+      "title": "A new member joins and borrows",
+      "job": "Someone joins your credit union and asks for a loan in the same sitting.",
+      "team": "Your team steps in only when an identity check fails, or when an application is not an auto-accept or an auto-decline.",
+      "stagesLine": "Of 8 stages, only 2 can need a person, and only sometimes.",
+      "human": [
+        {
+          "t": "An identity check fails",
+          "d": "Your team reviews it and approves, or follows up with the member."
+        },
+        {
+          "t": "An application is not an auto-accept or an auto-decline",
+          "d": "Your loan officer reviews it and can change the amount, rate or term."
+        }
+      ],
+      "plug": [
+        {
+          "name": "CUApps",
+          "role": "The member’s mobile and web app: every member task happens here"
+        },
+        {
+          "name": "Vouchsafe",
+          "role": "Checks the member’s identity and sends reminders"
+        },
+        {
+          "name": "GoCardless",
+          "role": "Takes the joining payment and sets up the Direct Debit"
+        },
+        {
+          "name": "Lending Metrics",
+          "role": "Credit, open banking and bank account checks"
+        },
+        {
+          "name": "Quid Finance",
+          "role": "Suggests accept, refer or decline"
+        },
+        {
+          "name": "PDF Butler and SIGN Butler",
+          "role": "Create the contract and get it signed online"
+        }
+      ]
+    },
+    "join": {
+      "label": "Join and save",
+      "title": "A new member joins and starts saving",
+      "job": "Someone becomes a member and opens an account.",
+      "team": "Your team steps in only if an identity check fails.",
+      "stagesLine": "Of 4 stages, only 1 can need a person, and only sometimes.",
+      "human": [
+        {
+          "t": "An identity check fails",
+          "d": "Your team reviews it and approves, or follows up with the member."
+        }
+      ],
+      "plug": [
+        {
+          "name": "CUApps",
+          "role": "The member’s mobile and web app: every member task happens here"
+        },
+        {
+          "name": "Vouchsafe",
+          "role": "Checks the member’s identity and sends reminders"
+        },
+        {
+          "name": "GoCardless",
+          "role": "Takes the joining payment"
+        }
+      ]
+    },
+    "loan": {
+      "label": "Existing member borrows",
+      "title": "An existing member borrows",
+      "job": "A member applies for a loan from their app or your website.",
+      "team": "Your team reviews only the applications that are not an auto-accept or an auto-decline.",
+      "stagesLine": "Of 5 stages, only 1 can need a person, and only sometimes.",
+      "human": [
+        {
+          "t": "An application is not an auto-accept or an auto-decline",
+          "d": "Your loan officer reviews it and can change the amount, rate or term."
+        }
+      ],
+      "plug": [
+        {
+          "name": "CUApps",
+          "role": "The member’s mobile and web app: every member task happens here"
+        },
+        {
+          "name": "Lending Metrics",
+          "role": "Credit, open banking and bank account checks"
+        },
+        {
+          "name": "Quid Finance",
+          "role": "Suggests accept, refer or decline"
+        },
+        {
+          "name": "PDF Butler and SIGN Butler",
+          "role": "Create the contract and get it signed online"
+        },
+        {
+          "name": "GoCardless",
+          "role": "Sets up the Direct Debit, if they pay that way"
+        }
+      ]
+    },
+    "ways": {
+      "label": "Applications from partners",
+      "title": "An application arrives from a partner",
+      "job": "A comparison site, a loan broker or NestEgg for Lloyds Bank sends you an application, and it starts a journey in Singlify like any other.",
+      "team": "From there, your usual journey applies.",
+      "stagesLine": "Wherever the application starts, it arrives in Singlify the same way.",
+      "human": [
+        {
+          "t": "Nothing at this stage",
+          "d": "The journey that follows is the same as for any other application."
+        }
+      ],
+      "plug": [
+        {
+          "name": "CUApps",
+          "role": "The member’s mobile and web app, where your own applications start"
+        },
+        {
+          "name": "NestEgg",
+          "role": "Sends applications for Lloyds Bank"
+        },
+        {
+          "name": "Credit Canary",
+          "role": "A loan broker platform that sends you applications"
+        },
+        {
+          "name": "Choose Wisely",
+          "role": "A comparison site that sends you applications"
+        }
+      ]
+    }
+  }
+}

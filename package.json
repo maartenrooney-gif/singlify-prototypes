@@ -1,0 +1,20 @@
+{
+  "name": "singlify-connectors-site",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --port 4321",
+    "test": "playwright test",
+    "placeholders": "node scripts.placeholders.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.1",
+    "astro": "^5.18.2",
+    "typescript": "^5.9.3"
+  }
+}

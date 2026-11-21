@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import Placeholder from './Placeholder.astro';
+const { title } = Astro.props as { title: string };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content="How Singlify connects credit unions to best-in-breed partners, and how to buy them." />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="banner"><div class="wrap">Prototype. Dashed boxes and marked text are placeholders awaiting confirmation. <a href={`${base}/placeholders/`}>See the full list</a>.</div></div>
+    <nav class="top" aria-label="Main">
+      <div class="wrap">
+        <a class="brand" href={`${base}/`}>Singlify connectors</a>
+        <ul>
+          <li><a href={`${base}/#outcomes`}>Member experience</a></li>
+          <li><a href={`${base}/#usecases`}>How it works</a></li>
+          <li><a href={`${base}/#partners`}>Partners</a></li>
+          <li><a href={`${base}/#directory`}>Directory</a></li>
+          <li><a href={`${base}/#buy`}>How to buy</a></li>
+        </ul>
+      </div>
+    </nav>
+    <main id="main"><slot /></main>
+    <footer><div class="wrap"><Placeholder item="logo-font" /></div></footer>
+  </body>
+</html>

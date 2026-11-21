@@ -1,0 +1,12 @@
+---
+import Text from '../Text.astro';
+import { humanSteps } from '../../lib/data';
+const { kind, name, text, human, tag, style } = Astro.props as { kind: 'member' | 'singlify' | 'team' | 'partner'; name?: string; text?: string; human?: string; tag?: string; style?: string };
+const h = human ? humanSteps[human] : undefined;
+---
+<div class={`card ${kind}`} style={style}>
+  {tag && <span class="tag">{tag}</span>}
+  {h
+    ? (<><span class="tag">Only sometimes</span><span class="nm">{h.short}</span>{h.d}</>)
+    : (<>{name && <span class="nm">{name}</span>}{text && <Text text={text} />}</>)}
+</div>

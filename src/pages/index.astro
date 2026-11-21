@@ -1,0 +1,267 @@
+---
+import Layout from '../components/Layout.astro';
+import Text from '../components/Text.astro';
+import Placeholder from '../components/Placeholder.astro';
+import Swimlane from '../components/Swimlane/Swimlane.astro';
+import { connectors, routes, choices, appExamples, useCases, flows, humanSteps, categories, routeFilters, FLOW_KEYS } from '../lib/data';
+
+const memberActions = (key: string) => flows[key].stages.flatMap((s) => s.attach.filter((a) => a.lane === 'member').map((a) => a.text!));
+const outcomes = [
+  { key: 'join', title: 'A new member joins', job: useCases.join.job, member: memberActions('join'), team: [humanSteps.identity.d.replace('Your team reviews it', 'Your team reviews the check, only if identity is not confirmed').replace(' and approves, or follows up with the member.', '.')] },
+  { key: 'loan', title: 'An existing member borrows', job: useCases.loan.job, member: memberActions('loan'), team: ['Your team reviews only the applications that are not an auto-accept or an auto-decline.', humanSteps.referred.d] },
+];
+const promises = [
+  { t: 'A smooth start for new members', d: 'New members join in the app. Checks happen behind the scenes.' },
+  { t: 'Nothing is a black box', d: 'Every journey is shown step by step, so you can see who does what.' },
+  { t: 'Contracting kept simple', d: 'Three ways to buy, and the same one-page summary for every partner.' },
+];
+const hl = (label: string) => label;
+---
+<Layout title="Singlify connectors">
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="headline"><i>Maximise your engagement,</i> <b><i>Singlify your systems.</i></b></h1>
+      <p class="lede">New members join in the app. Existing members apply for a loan in the app. Checks and payout happen behind the scenes, and your team steps in only where a person makes a difference.</p>
+      <div class="btns">
+        <a class="btn" href="#usecases">See how it works</a>
+        <a class="btn alt" href="#partners">Meet the partners</a>
+      </div>
+      <ul class="promises">
+        {promises.map((p) => <li><strong>{p.t}</strong>{p.d}</li>)}
+      </ul>
+      <Placeholder item="promises-copy" />
+    </div>
+  </section>
+
+  <section class="tint" id="outcomes" aria-labelledby="outcomes-h">
+    <div class="wrap">
+      <h2 id="outcomes-h">What your members and team experience</h2>
+      <div class="outcomes">
+        {outcomes.map((o) => (
+          <article class="block">
+            <h3>{o.title}</h3>
+            <p>{o.job}</p>
+            <h4>For your member</h4>
+            <ul>{o.member.map((m) => <li><Text text={m} /></li>)}</ul>
+            <h4>For your team</h4>
+            <ul>{o.team.map((m) => <li>{m}</li>)}</ul>
+            <p style="margin-top:1.2rem"><button type="button" class="btn" data-open-flow={o.key}>See this journey</button></p>
+          </article>
+        ))}
+      </div>
+      <Placeholder item="outcome-proof" />
+    </div>
+  </section>
+
+  <section id="usecases" aria-labelledby="uc-h">
+    <div class="wrap">
+      <h2 id="uc-h">How it works</h2>
+      <p class="lede">Nothing is a black box. Pick a journey to see who does what at each stage.</p>
+      <Placeholder item="process-count" />
+      <ol class="steps">
+        <li><strong>The member acts in the CUApps app.</strong> Every member task happens there.</li>
+        <li><strong>Singlify asks the partner to do its step.</strong> Partners connect only to Singlify.</li>
+        <li><strong>The result comes back to Singlify.</strong> It either moves on automatically or becomes a task for your team.</li>
+      </ol>
+      <div class="tablist" role="tablist" aria-label="Journeys">
+        {FLOW_KEYS.map((k, i) => (
+          <button type="button" class="tab" role="tab" id={`tab-${k}`} aria-controls={`panel-${k}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-flow={k}>{useCases[k].label}</button>
+        ))}
+      </div>
+      {FLOW_KEYS.map((k, i) => {
+        const uc = useCases[k];
+        return (
+          <div class="uc" role="tabpanel" id={`panel-${k}`} aria-labelledby={`tab-${k}`} hidden={i !== 0} tabindex="0">
+            <div class="uc-grid">
+              <div>
+                <h3>{uc.title}</h3>
+                <p>{uc.job}</p>
+                <p><strong>{uc.team}</strong> {k === 'borrow' || k === 'loan' ? <Placeholder item="auto-decision" inline /> : null}</p>
+                <h4>Partners that plug in</h4>
+                <ul class="plug">{uc.plug.map((p: any) => <li><strong>{p.name}</strong>{p.role}</li>)}</ul>
+              </div>
+              <aside class="human" aria-label="Human steps">
+                <h4>Only the high-value human steps remain</h4>
+                <p class="count">{uc.stagesLine}</p>
+                <ul>{uc.human.map((h: any) => <li><strong>{h.t}</strong><br />{h.d}</li>)}</ul>
+              </aside>
+            </div>
+            <Swimlane flow={flows[k]} caption={`${uc.label}: ${uc.title.toLowerCase()}`} />
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="tint" id="partners" aria-labelledby="partners-h">
+    <div class="wrap">
+      <h2 id="partners-h">We help you choose the right partners</h2>
+      <p class="lede">Singlify integrates best-in-breed partners and keeps every journey smooth for members and staff. The partner supports its own product. Singlify supports the connection.</p>
+      <div class="three">
+        <article class="block"><h3>We help you choose</h3><p>Singlify helps you pick the right partner for each job.</p></article>
+        <article class="block"><h3>We check them first</h3><p>Every partner goes through due diligence and testing before it is offered.</p></article>
+        <article class="block"><h3>We look after the connections</h3><p>Singlify is the first call, and often negotiates discounts on your behalf.</p></article>
+      </div>
+      <Placeholder item="claims-verify" />
+    </div>
+  </section>
+
+  <section id="choices" aria-labelledby="choices-h">
+    <div class="wrap">
+      <h2 id="choices-h">More than one partner for the same job</h2>
+      <p class="lede">Where there is a choice, Singlify has tested each option.</p>
+      <table class="choices">
+        <caption class="sr-only">Jobs with more than one partner</caption>
+        <thead><tr><th scope="col">The job</th><th scope="col">When it is used</th><th scope="col">Your choice of partner</th></tr></thead>
+        <tbody>
+          {choices.map((c) => <tr><th scope="row" data-l="The job">{c.job}</th><td data-l="When it is used">{c.where}</td><td data-l="Your choice of partner">{c.partners}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="tint" id="directory" aria-labelledby="dir-h">
+    <div class="wrap">
+      <h2 id="dir-h">Directory of connectors</h2>
+      <p class="lede">Every connector, by what you need and how you buy it.</p>
+      <div class="filters">
+        <fieldset><legend>Need</legend><div class="row" data-filter="cat">
+          {categories.map((c, i) => <button type="button" class="toggle" data-value={c} aria-pressed={i === 0 ? 'true' : 'false'}>{c}</button>)}
+        </div></fieldset>
+        <fieldset><legend>How you buy</legend><div class="row" data-filter="route">
+          {routeFilters.map((c, i) => <button type="button" class="toggle" data-value={c} aria-pressed={i === 0 ? 'true' : 'false'}>{c}</button>)}
+        </div></fieldset>
+      </div>
+      <p class="count" id="dir-count" role="status" aria-live="polite">Showing {connectors.length} of {connectors.length} connectors</p>
+      <ul class="dir" id="dir-list" data-total={connectors.length}>
+        {connectors.map((c) => (
+          <li data-cat={c.category} data-route={c.route}>
+            <div>
+              <h3>{c.name} <span class={`badge ${c.route}`} title={routes[c.route]}>{c.route}</span></h3>
+              <p style="margin:0"><Text text={c.does} /></p>
+            </div>
+            <dl>
+              <dt>Plugs in at</dt><dd><Text text={c.step} /></dd>
+              <dt>How to buy</dt><dd><Text text={c.buy} /></dd>
+              <dt>Live status</dt><dd><Placeholder item="live-status" inline /></dd>
+            </dl>
+          </li>
+        ))}
+      </ul>
+      <div class="empty" id="dir-empty" hidden>
+        <p>No connector matches both filters.</p>
+        <button type="button" class="btn" id="dir-reset">Show every connector</button>
+      </div>
+      <Placeholder item="to-map" />
+      <Placeholder item="contract-route" />
+    </div>
+  </section>
+
+  <section id="buy" aria-labelledby="buy-h">
+    <div class="wrap">
+      <h2 id="buy-h">How to buy</h2>
+      <p class="lede">Three routes. The partner supports its own product, and Singlify supports the connection.</p>
+      <div class="routes">
+        <article class="block"><h3>Included in the Singlify licence</h3><p>Already switched on, one invoice, and Singlify supports it.</p><p>Examples: FinDock, PDF Butler and SIGN Butler, Spanning, CUApps.</p><p><Placeholder item="bundle-price" inline /></p></article>
+        <article class="block"><h3>Add from the Salesforce AppExchange</h3><p>Switch it on in Salesforce. A monthly subscription, billed through Salesforce, with no integration project.</p><p>Singlify has not tested these apps and can advise on fit.</p></article>
+        <article class="block"><h3>Your choice, your contract</h3><p>Singlify has tested the connection, helps you choose and often negotiates a discount. You contract directly with the partner.</p><p>Self-serve: sign up online for a small monthly fee (Xero, Mailchimp). Standard contract: a quote and order form (decisioning, ID checks, payments).</p><p><Placeholder item="prices-terms" inline /></p></article>
+      </div>
+      <div class="summary">
+        <h3>The same one-page summary for every partner</h3>
+        <ul>
+          <li>Price and what it covers</li>
+          <li>How to buy: online or order form</li>
+          <li>Minimum term and notice</li>
+          <li>Time to switch on</li>
+          <li>Who supports what</li>
+        </ul>
+        <Placeholder item="partner-sheet" />
+      </div>
+    </div>
+  </section>
+
+  <section class="tint" id="appexchange" aria-labelledby="ax-h">
+    <div class="wrap">
+      <h2 id="ax-h">More from the Salesforce AppExchange</h2>
+      <p class="lede">Examples of apps from Salesforce’s marketplace. Singlify has not tested these apps.</p>
+      <ul class="app-grid">
+        {appExamples.map((a) => (
+          <li><span class="kind">{a.kind}</span><h3>{a.name}</h3><p><Text text={a.does} /></p><p><Text text={a.how} /></p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-h">
+    <div class="wrap">
+      <h2 id="cta-h" class="headline" style="font-size:clamp(1.8rem,4vw,2.6rem)"><i>Get your credit union’s</i> <b><i>integration map.</i></b></h2>
+      <p><a class="btn" href="#cta-h" aria-disabled="true" role="link">Get your credit union’s integration map</a></p>
+      <Placeholder item="cta-destination" />
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => Array.from(r.querySelectorAll<T>(s));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Tabs
+  const tabs = $$('[role=tab]');
+  function selectTab(key: string, focus = false) {
+    for (const t of tabs) {
+      const on = t.dataset.flow === key;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    }
+    for (const p of $$('[role=tabpanel]')) p.hidden = p.id !== `panel-${key}`;
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => selectTab(t.dataset.flow!));
+    t.addEventListener('keydown', (e) => {
+      const k = (e as KeyboardEvent).key;
+      const to = k === 'ArrowRight' ? i + 1 : k === 'ArrowLeft' ? i - 1 : k === 'Home' ? 0 : k === 'End' ? tabs.length - 1 : -1;
+      if (to < 0) return;
+      e.preventDefault();
+      selectTab(tabs[(to + tabs.length) % tabs.length].dataset.flow!, true);
+    });
+  });
+  $$('[data-open-flow]').forEach((b) => b.addEventListener('click', () => {
+    selectTab(b.dataset.openFlow!);
+    const el = document.getElementById('usecases')!;
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    document.getElementById(`tab-${b.dataset.openFlow}`)?.focus({ preventScroll: true });
+  }));
+
+  // Full / half size
+  $$('[data-sizes]').forEach((g) => {
+    const frame = g.closest<HTMLElement>('.frame')!;
+    $$('button', g).forEach((b) => b.addEventListener('click', () => {
+      frame.dataset.size = b.dataset.size;
+      $$('button', g).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    }));
+  });
+
+  // Directory filters
+  const state = { cat: 'All', route: 'All' };
+  const items = $$('#dir-list > li');
+  const count = document.getElementById('dir-count')!;
+  const empty = document.getElementById('dir-empty')!;
+  function apply() {
+    let n = 0;
+    for (const li of items) {
+      const show = (state.cat === 'All' || li.dataset.cat === state.cat) && (state.route === 'All' || li.dataset.route === state.route);
+      li.hidden = !show;
+      if (show) n++;
+    }
+    count.textContent = `Showing ${n} of ${items.length} connectors`;
+    empty.hidden = n !== 0;
+  }
+  function setFilter(kind: 'cat' | 'route', value: string) {
+    state[kind] = value;
+    $$(`[data-filter=${kind}] button`).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.value === value)));
+    apply();
+  }
+  (['cat', 'route'] as const).forEach((kind) => $$(`[data-filter=${kind}] button`).forEach((b) => b.addEventListener('click', () => setFilter(kind, b.dataset.value!))));
+  document.getElementById('dir-reset')!.addEventListener('click', () => { setFilter('cat', 'All'); setFilter('route', 'All'); });
+</script>

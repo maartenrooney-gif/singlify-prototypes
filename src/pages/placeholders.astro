@@ -1,0 +1,30 @@
+---
+import Layout from '../components/Layout.astro';
+import { openItems, connectors, flows } from '../lib/data';
+import { collect } from '../lib/placeholders.mjs';
+import connectorsRaw from '../data/connectors.json';
+const found = collect(connectorsRaw);
+---
+<Layout title="Placeholder register">
+  <section class="reg">
+    <div class="wrap">
+      <h1 class="headline" style="font-size:2.4rem">Placeholder register</h1>
+      <p class="lede">Everything on the site that awaits confirmation. Nothing here is real content.</p>
+      <h2>Open items ({openItems.length})</h2>
+      <table>
+        <thead><tr><th>Item</th><th>What is needed</th><th>Where it shows</th></tr></thead>
+        <tbody>
+          {openItems.map((o) => (
+            <tr id={o.id}><td><strong>{o.title}</strong></td><td>{o.detail}</td><td>{o.where}</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <h2 style="margin-top:2rem">Marked values in the content data ({found.length})</h2>
+      <p>Found automatically in <code>src/data/connectors.json</code>. Replace the text there and the marking disappears.</p>
+      <table>
+        <thead><tr><th>Path</th><th>Value</th></tr></thead>
+        <tbody>{found.map((f) => <tr><td><code>{f.path}</code></td><td>{f.text}</td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,9 @@
+---
+import { openItem } from '../lib/data';
+const { item, inline = false } = Astro.props as { item: string; inline?: boolean };
+const it = openItem(item);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+{inline
+  ? <mark class="ph" title={it.title}>{it.short}</mark>
+  : <p class="ph-block" data-open-item={item}>{it.short} <a href={`${base}/placeholders/#${item}`}>Open item</a></p>}
