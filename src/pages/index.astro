@@ -109,12 +109,14 @@ const hl = (label: string) => label;
   <section id="choices" aria-labelledby="choices-h">
     <div class="wrap">
       <h2 id="choices-h">More than one partner for the same job</h2>
-      <p class="lede">Where there is a choice, Singlify has tested each option.</p>
+      <p class="lede">Where there is a choice, Singlify has tested each option. For applications, your own website and app are always on. Broker channels are optional, and you can switch on one or many.</p>
       <table class="choices">
         <caption class="sr-only">Jobs with more than one partner</caption>
         <thead><tr><th scope="col">The job</th><th scope="col">When it is used</th><th scope="col">Your choice of partner</th></tr></thead>
         <tbody>
-          {choices.map((c) => <tr><th scope="row" data-l="The job">{c.job}</th><td data-l="When it is used">{c.where}</td><td data-l="Your choice of partner">{c.partners}</td></tr>)}
+          {choices.map((c) => <tr><th scope="row" data-l="The job">{c.job}</th><td data-l="When it is used">{c.where}</td><td data-l="Your choice of partner">{(c as any).groups
+            ? <ul class="groups">{(c as any).groups.map((g: any) => <li><span class="gtag">{g.tag}</span><strong>{g.label}</strong><br />{g.note}<br /><span class="gp">{g.partners}</span></li>)}</ul>
+            : c.partners}</td></tr>)}
         </tbody>
       </table>
     </div>

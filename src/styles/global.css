@@ -216,3 +216,9 @@ footer { padding: 2rem 0; border-top: 1px solid var(--line); font-size: .9rem; }
 .reg th, .reg td { text-align: left; vertical-align: top; padding: .5rem .6rem; border-bottom: 1px solid var(--line); }
 .reg code { font-size: .85rem; word-break: break-word; }
 .lg-band span { font-size: 1.1em; }
+.groups { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+.groups li { border-left: 4px solid var(--bright-green); padding-left: .7rem; }
+.groups li + li { border-left-color: var(--dark-blue); }
+.gtag { display: inline-block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; border: 2px solid var(--dark-grey); border-radius: 999px; padding: 0 .6em; margin-right: .5rem; }
+.groups li:first-child .gtag { background: var(--bright-green); }
+.gp { font-weight: 700; }

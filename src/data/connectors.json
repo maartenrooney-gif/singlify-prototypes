@@ -164,7 +164,21 @@
     {
       "job": "Where applications come from",
       "where": "Used when someone applies",
-      "partners": "CUApps, NestEgg for Lloyds Bank, Credit Canary, Choose Wisely"
+      "partners": "Organic: CUApps. Broker channels: NestEgg for Lloyds Bank, Credit Canary, Choose Wisely",
+      "groups": [
+        {
+          "label": "Organic",
+          "tag": "Always on",
+          "note": "Applications through your website or mobile app.",
+          "partners": "CUApps"
+        },
+        {
+          "label": "Broker channels",
+          "tag": "Optional: switch on one or many",
+          "note": "Applications sent to you by a broker.",
+          "partners": "NestEgg for Lloyds Bank, Credit Canary, Choose Wisely"
+        }
+      ]
     },
     {
       "job": "Credit checks and decisions",
@@ -326,9 +340,9 @@
       ]
     },
     "ways": {
-      "label": "Applications from partners",
-      "title": "An application arrives from a partner",
-      "job": "A comparison site, a loan broker or NestEgg for Lloyds Bank sends you an application, and it starts a journey in Singlify like any other.",
+      "label": "Applications from brokers",
+      "title": "An application arrives from a broker",
+      "job": "Organic applications through your website or mobile app are always on. You can also switch on one or many broker channels: NestEgg for Lloyds Bank, Credit Canary and Choose Wisely. Each sends you an application, and it starts a journey in Singlify like any other.",
       "team": "From there, your usual journey applies.",
       "stagesLine": "Wherever the application starts, it arrives in Singlify the same way.",
       "human": [
@@ -340,19 +354,19 @@
       "plug": [
         {
           "name": "CUApps",
-          "role": "The member’s mobile and web app, where your own applications start"
+          "role": "Organic, always on: the member’s mobile and web app, and your website"
         },
         {
           "name": "NestEgg",
-          "role": "Sends applications for Lloyds Bank"
+          "role": "Optional broker channel: sends applications for Lloyds Bank"
         },
         {
           "name": "Credit Canary",
-          "role": "A loan broker platform that sends you applications"
+          "role": "Optional broker channel: a loan broker platform that sends you applications"
         },
         {
           "name": "Choose Wisely",
-          "role": "A comparison site that sends you applications"
+          "role": "Optional broker channel: a comparison site that sends you applications"
         }
       ]
     }

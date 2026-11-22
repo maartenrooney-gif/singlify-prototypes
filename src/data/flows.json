@@ -80,9 +80,9 @@
     },
     "ways.created": {
       "title": "Application created",
-      "note": "A journey starts, like any other application",
+      "note": "A journey starts, like any other application. Broker channels are optional: switch on one or many.",
       "attach": [
-        { "lane": "member", "text": "Your own applications start here" },
+        { "lane": "member", "text": "Organic: applications through your website or mobile app (always on)" },
         { "lane": "partner", "name": "NestEgg", "text": "Sends applications for Lloyds Bank" },
         { "lane": "partner", "name": "Credit Canary", "text": "A loan broker platform that sends you applications" },
         { "lane": "partner", "name": "Choose Wisely", "text": "A comparison site that sends you applications" }
